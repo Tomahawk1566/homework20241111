@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,9 +26,9 @@ public class Main {
         List<BankAccount> bankAccounts = List.of(
                 new BankAccount(new Person("Jack", "Vorobey", "vorobei@mail.com"), "DE89370400440532013001", 0.00),
                 new BankAccount(new Person("John", "Smnith", "SmT@mail.com"), "DE89370400440532013002", 100000),
-                new BankAccount(new Person("Nick", "NIckson", "vorobei@mail.com"), "DE89370400440532013003", 256789),
-                new BankAccount(new Person("Sveta", "Ivanova", "vorobei@mail.com"), "DE89370400440532013004", 99999999.9),
-                new BankAccount(new Person("Homer", "Simson", "vorobei@mail.com"), "DE89370400440532013005", 77777777.7)
+                new BankAccount(new Person("Nick", "NIckson", "mickson@mail.com"), "DE89370400440532013003", 256789),
+                new BankAccount(new Person("Sveta", "Ivanova", "ivanova@mail.com"), "DE89370400440532013004", 99999999.9),
+                new BankAccount(new Person("Homer", "Simson", "simpson@mail.com"), "DE89370400440532013005", 77777777.7)
 
         );
         Map<Person, Double> mapByKeyPersonBalanceValue = bankAccounts.stream()//map где ключом будет owner (Person), а значением будет баланс (Double)
@@ -50,5 +51,18 @@ public class Main {
         System.out.println(mapByKeyIBANOwnerValue);
         System.out.println("-----------------------------------------------");
         System.out.println(mapByKeyPersonStringValue);
+        //Task #2
+        Map<String, BankAccount> emailToAccountMap = bankAccounts.stream()
+                .sorted((a, b) -> b.getBalance() > a.getBalance() ? 1 : (b.getBalance() < a.getBalance() ? -1 : 0))
+                .limit(3)
+                .collect(Collectors.toMap(
+                        account -> account.getOwner().getEmail(),
+                        account -> account
+
+                ));
+        System.out.println(emailToAccountMap);
+
+
+
     }
 }
