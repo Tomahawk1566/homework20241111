@@ -52,6 +52,7 @@ public class Main {
         System.out.println("-----------------------------------------------");
         System.out.println(mapByKeyPersonStringValue);
         //Task #2
+        //Дана Map <String, BankAccount,> ключ это email. Ваша задача используя стримы лист из имен 3 самых крупных клиентов (т.е. тех у кого на счету самый большой остаток)
         Map<String, BankAccount> emailToAccountMap = bankAccounts.stream()
                 .sorted((a, b) -> b.getBalance() > a.getBalance() ? 1 : (b.getBalance() < a.getBalance() ? -1 : 0))
                 .limit(3)
